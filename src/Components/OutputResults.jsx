@@ -1,11 +1,8 @@
-import { apiFetch } from "../Logic/ApiFetch";
-import { useApiContext } from "../State/ApiContext";
+import { useApiFetch } from "../Logic/ApiFetch";
 
 export default function OutputResults() {
-  const results = apiFetch();
+  const results = useApiFetch();
   console.log("RENDER", results);
-
-  console.log(results);
 
   return (
     <>

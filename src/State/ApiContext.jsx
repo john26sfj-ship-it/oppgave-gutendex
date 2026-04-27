@@ -5,17 +5,11 @@ const ApiContext = createContext();
 export function ApiContextProvider({ children }) {
   const [data, setData] = useState([]);
   const [callUrl, setCallUrl] = useState("https://gutendex.com/books");
-  const handleData = (data) => {
-    setData(data);
-  };
-  const handleCallUrl = (url) => {
-    setCallUrl(url);
-  };
   const values = {
     data,
-    handleData,
+    setData,
     callUrl,
-    handleCallUrl,
+    setCallUrl,
   };
 
   return <ApiContext.Provider value={values}>{children}</ApiContext.Provider>;
@@ -26,5 +20,5 @@ export function useApiContext() {
   if (!context) {
     throw new Error("useApiContext must be used within a ApiContextProvider");
   }
-  return useContext(ApiContext);
+  return context;
 }
