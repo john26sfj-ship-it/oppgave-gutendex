@@ -1,0 +1,30 @@
+.loading {
+  text-align: center;
+}
+
+.layout {
+  display: grid;
+  justify-content: space-around;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat();
+}
+
+.card {
+  margin: 3%;
+  justify-self: center;
+  width: 140px;
+  height: 200px;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgba(455, 455, 455, 0.5);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  width: 95%;
+  height: 96%;
+  border-radius: 0.5rem;
+}

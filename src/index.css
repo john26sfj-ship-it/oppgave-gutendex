@@ -1,5 +1,23 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --primary-background-color: #fdb886;
+  --primary-text-color: #3f1b01;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  background-color: var(--primary-background-color);
+}
+
+h1 {
+  color: var(--primary-text-color);
+  text-align: center;
+  font-size: 1.5rem;
 }
