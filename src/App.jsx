@@ -1,9 +1,10 @@
+import NavBar from "./Components/NavBar";
 import OutputResults from "./Components/OutputResults";
 
 function App() {
   return (
     <>
-      <h1>Current search:</h1>
+      <NavBar />
       <OutputResults />
     </>
   );
