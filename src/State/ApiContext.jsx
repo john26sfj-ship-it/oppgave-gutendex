@@ -4,12 +4,12 @@ const ApiContext = createContext();
 
 export function ApiContextProvider({ children }) {
   const [data, setData] = useState([]);
-  const [callUrl, setCallUrl] = useState("https://gutendex.com/books");
+  const [baseUrl, setBaseUrl] = useState("https://gutendex.com/books");
   const values = {
     data,
     setData,
-    callUrl,
-    setCallUrl,
+    baseUrl,
+    setBaseUrl,
   };
 
   return <ApiContext.Provider value={values}>{children}</ApiContext.Provider>;
