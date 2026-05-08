@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useCategoriesContext } from "../State/CategoriesContext";
-
+import styles from "../styles/NavBar.module.css";
 export default function Categories() {
   const { category, setCategory } = useCategoriesContext();
 
@@ -9,8 +9,13 @@ export default function Categories() {
   };
 
   return (
-    <select value={category} onChange={handleChange} id="categories-pulldown">
-      <option value="">None</option>
+    <select
+      className={styles.searchElement}
+      value={category}
+      onChange={handleChange}
+      id="categories-pulldown"
+    >
+      <option value="">No Category</option>
       <option value="Fiction">Fiction</option>
       <option value="Mystery">Mystery</option>
       <option value="Thriller">Thriller</option>
