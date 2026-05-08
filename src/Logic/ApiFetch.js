@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useApiContext } from "../State/ApiContext";
 import { useCategoriesContext } from "../State/CategoriesContext";
 import { useSearchContext } from "../State/SearchContext";
+import { usePageContext } from "../State/PageContext";
 
 export function useApiFetch() {
   const { data, setData, baseUrl, setBaseUrl } = useApiContext();
   const { category } = useCategoriesContext();
   const { search } = useSearchContext();
+  const { page, setPage } = usePageContext();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,9 +22,13 @@ export function useApiFetch() {
       params.set("search", search);
     }
 
+    if (page >= 1) {
+      params.set("page", page);
+    }
+
     const query = params.toString();
     setBaseUrl(`https://gutendex.com/books${query ? `?${query}` : ""}`);
-  }, [category, search, setBaseUrl]);
+  }, [category, search, setBaseUrl, page]);
 
   useEffect(() => {
     const getFullData = async () => {

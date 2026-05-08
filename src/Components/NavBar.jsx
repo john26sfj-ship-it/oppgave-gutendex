@@ -2,6 +2,7 @@ import Categories from "./Categories";
 import ResetButton from "./ResetButton";
 import SearchField from "./SearchField";
 import styles from "../styles/NavBar.module.css";
+import PageButtons from "./PageButtons";
 
 export default function NavBar() {
   return (
@@ -12,6 +13,7 @@ export default function NavBar() {
         <SearchField />
         <ResetButton />
       </div>
+      <PageButtons />
     </nav>
   );
 }

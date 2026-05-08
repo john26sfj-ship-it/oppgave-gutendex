@@ -18,3 +18,10 @@
 form {
   width: fit-content;
 }
+
+.pageButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
