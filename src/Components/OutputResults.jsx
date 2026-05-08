@@ -1,16 +1,29 @@
 import { useApiFetch } from "../Logic/ApiFetch";
+import { useFavoritesContext } from "../State/FavoritesContext";
 import styles from "../styles/OutputResults.module.css";
+import heartOutline from "../images/heart-outline.svg";
+import heartFilled from "../images/heart-filled.svg";
+
 export default function OutputResults() {
   const { data, loading } = useApiFetch();
+  const { favoriteBooks, showFavorites, toggleFavoriteBook } =
+    useFavoritesContext();
   console.log("RENDER", data);
-  const books = data.results || [];
+  const favoriteBookIds = favoriteBooks.map((book) => book.id);
+  const books = showFavorites ? favoriteBooks : data.results || [];
 
   return (
     <div>
-      {loading && <p className={styles.loading}>Loading...</p>}
+      {!showFavorites && loading && <p className={styles.loading}>Loading...</p>}
       <div className={styles.layout}>
-        {books.map((result, index) => (
-          <div className={styles.card} key={index}>
+        {books.map((result) => (
+          <div className={styles.card} key={result.id}>
+            <img
+              className={styles.heart}
+              src={favoriteBookIds.includes(result.id) ? heartFilled : heartOutline}
+              alt="Click to favorite this book"
+              onClick={() => toggleFavoriteBook(result)}
+            />
             <img
               className={styles.image}
               src={result.formats["image/jpeg"]}

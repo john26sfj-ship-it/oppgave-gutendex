@@ -6,15 +6,18 @@ import { ApiContextProvider } from "./State/ApiContext.jsx";
 import { CategoriesContextProvider } from "./State/CategoriesContext.jsx";
 import { SearchContextProvider } from "./State/SearchContext.jsx";
 import { PageContextProvider } from "./State/PageContext.jsx";
+import { FavoritesContextProvider } from "./State/FavoritesContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   //<StrictMode>
   <PageContextProvider>
     <SearchContextProvider>
       <CategoriesContextProvider>
-        <ApiContextProvider>
-          <App />
-        </ApiContextProvider>
+        <FavoritesContextProvider>
+          <ApiContextProvider>
+            <App />
+          </ApiContextProvider>
+        </FavoritesContextProvider>
       </CategoriesContextProvider>
     </SearchContextProvider>
   </PageContextProvider>,

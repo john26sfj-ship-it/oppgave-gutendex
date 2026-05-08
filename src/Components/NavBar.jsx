@@ -3,6 +3,7 @@ import ResetButton from "./ResetButton";
 import SearchField from "./SearchField";
 import styles from "../styles/NavBar.module.css";
 import PageButtons from "./PageButtons";
+import FavoritesButton from "./FavoritesButton";
 
 export default function NavBar() {
   return (
@@ -14,6 +15,7 @@ export default function NavBar() {
         <ResetButton />
       </div>
       <PageButtons />
+      <FavoritesButton />
     </nav>
   );
 }
