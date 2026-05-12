@@ -7,6 +7,8 @@ import { CategoriesContextProvider } from "./State/CategoriesContext.jsx";
 import { SearchContextProvider } from "./State/SearchContext.jsx";
 import { PageContextProvider } from "./State/PageContext.jsx";
 import { FavoritesContextProvider } from "./State/FavoritesContext.jsx";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes.jsx";
 
 createRoot(document.getElementById("root")).render(
   //<StrictMode>
@@ -15,7 +17,7 @@ createRoot(document.getElementById("root")).render(
       <CategoriesContextProvider>
         <FavoritesContextProvider>
           <ApiContextProvider>
-            <App />
+            <RouterProvider router={router} />
           </ApiContextProvider>
         </FavoritesContextProvider>
       </CategoriesContextProvider>

@@ -1,10 +1,10 @@
 import { useApiFetch } from "../Logic/ApiFetch";
 import { useFavoritesContext } from "../State/FavoritesContext";
-import styles from "../styles/OutputResults.module.css";
+import styles from "../styles/HomePage.module.css";
 import heartOutline from "../images/heart-outline.svg";
 import heartFilled from "../images/heart-filled.svg";
 
-export default function OutputResults() {
+export default function HomePage() {
   const { data, loading } = useApiFetch();
   const { favoriteBooks, showFavorites, toggleFavoriteBook } =
     useFavoritesContext();

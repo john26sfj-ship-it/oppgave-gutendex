@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useCategoriesContext } from "../State/CategoriesContext";
 import styles from "../styles/NavBar.module.css";
+import { useNavigate } from "react-router-dom";
+
 export default function Categories() {
   const { category, setCategory } = useCategoriesContext();
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setCategory(event.target.value);
+    navigate("/");
   };
 
   return (
