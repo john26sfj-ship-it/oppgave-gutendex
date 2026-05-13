@@ -1,45 +1,69 @@
-import { useEffect, useState } from "react";
-import { useApiContext } from "../State/ApiContext";
+import { useQuery } from "@tanstack/react-query";
 import { useCategoriesContext } from "../State/CategoriesContext";
 import { useSearchContext } from "../State/SearchContext";
 import { usePageContext } from "../State/PageContext";
 
+async function fetchBooks({ category, search, page }) {
+  const params = new URLSearchParams();
+
+  if (category !== "") {
+    params.set("topic", category);
+  }
+
+  if (search !== "") {
+    params.set("search", search);
+  }
+
+  if (page >= 1) {
+    params.set("page", page);
+  }
+
+  const query = params.toString();
+  const response = await fetch(
+    `https://gutendex.com/books${query ? `?${query}` : ""}`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch books");
+  }
+
+  return response.json();
+}
+
+async function fetchBookDetails(bookId) {
+  const response = await fetch(`https://gutendex.com/books/${bookId}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch book details");
+  }
+
+  return response.json();
+}
+
 export function useApiFetch() {
-  const { data, setData, baseUrl, setBaseUrl } = useApiContext();
   const { category } = useCategoriesContext();
   const { search } = useSearchContext();
-  const { page, setPage } = usePageContext();
-  const [loading, setLoading] = useState(true);
+  const { page } = usePageContext();
+  const query = useQuery({
+    queryKey: ["books", { category, search, page }],
+    queryFn: () => fetchBooks({ category, search, page }),
+  });
 
-  useEffect(() => {
-    const params = new URLSearchParams();
+  return {
+    ...query,
+    loading: query.isLoading,
+  };
+}
 
-    if (category !== "") {
-      params.set("topic", category);
-    }
+export function useBookDetailsFetch(bookId) {
+  const query = useQuery({
+    queryKey: ["book", bookId],
+    queryFn: () => fetchBookDetails(bookId),
+    enabled: Boolean(bookId),
+  });
 
-    if (search !== "") {
-      params.set("search", search);
-    }
-
-    if (page >= 1) {
-      params.set("page", page);
-    }
-
-    const query = params.toString();
-    setBaseUrl(`https://gutendex.com/books${query ? `?${query}` : ""}`);
-  }, [category, search, setBaseUrl, page]);
-
-  useEffect(() => {
-    const getFullData = async () => {
-      setLoading(true);
-      const response = await fetch(baseUrl);
-      const result = await response.json();
-      setData(result);
-      setLoading(false);
-    };
-    getFullData();
-  }, [baseUrl, setData]);
-
-  return { data, loading };
+  return {
+    ...query,
+    loading: query.isLoading,
+  };
 }
