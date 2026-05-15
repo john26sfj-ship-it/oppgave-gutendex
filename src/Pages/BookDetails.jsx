@@ -16,9 +16,11 @@ export default function BookDetails() {
   const download_count = book?.download_count || [];
   const categories = book?.bookshelves || [];
   const image = book?.formats?.["image/jpeg"];
+  // Keep only downloadable file formats like PDF, EPUB, and ZIP.
   const applicationFormats = Object.entries(book?.formats || {}).filter(
     ([format]) => format.startsWith("application/"),
   );
+  // Decide which heart icon to show for this book.
   const isFavorite = favoriteBooks.some(
     (favoriteBook) => favoriteBook.id === book?.id,
   );
@@ -27,6 +29,7 @@ export default function BookDetails() {
     return <div>Loading...</div>;
   }
 
+  // TanStack stores thrown fetch errors here.
   if (isError) {
     return <div>{error.message}</div>;
   }

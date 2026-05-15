@@ -7,6 +7,7 @@ export default function PageButtons() {
   const { data, loading } = useBooksQuery();
 
   const handlePageChange = (newPage) => {
+    // Prevent the page number from going below 1.
     setPage(Math.max(1, newPage));
   };
 

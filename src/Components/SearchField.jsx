@@ -20,6 +20,7 @@ export default function SearchField() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // New searches should always begin on page 1.
     setPage(1);
     setSearch(searchInput);
     navigate("/");

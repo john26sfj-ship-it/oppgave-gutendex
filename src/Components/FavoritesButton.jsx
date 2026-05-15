@@ -17,6 +17,7 @@ export default function FavoritesButton() {
       type="button"
       onClick={() => {
         if (!showFavorites) {
+          // Remember where the user came from before showing favorites.
           setReturnPath(location.pathname);
           setShowFavorites(true);
           navigate("/");

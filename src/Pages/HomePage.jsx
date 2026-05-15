@@ -11,9 +11,11 @@ export default function HomePage() {
   const { favoriteBooks, showFavorites, toggleFavoriteBook } =
     useFavoritesContext();
   const favoriteBookIds = favoriteBooks.map((book) => book.id);
+  // Show saved books when favorites mode is active.
   const books = showFavorites ? favoriteBooks : data?.results || [];
 
   useEffect(() => {
+    // Helpful while learning the API response shape.
     if (data) {
       console.log("HomePage full API result:", data);
     }
@@ -23,6 +25,7 @@ export default function HomePage() {
     return <p className={styles.loading}>Loading...</p>;
   }
 
+  // API errors should not block the local favorites view.
   if (!showFavorites && isError) {
     return <p className={styles.loading}>{error.message}</p>;
   }

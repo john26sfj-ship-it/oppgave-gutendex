@@ -5,6 +5,7 @@ const FAVORITES_STORAGE_KEY = "favoriteBooks";
 
 export function FavoritesContextProvider({ children }) {
   const [favoriteBooks, setFavoriteBooks] = useState(() => {
+    // Load saved favorites once when the app starts.
     const storedFavoriteBooks = localStorage.getItem(FAVORITES_STORAGE_KEY);
 
     if (!storedFavoriteBooks) {
@@ -20,10 +21,12 @@ export function FavoritesContextProvider({ children }) {
   const [showFavorites, setShowFavorites] = useState(false);
 
   useEffect(() => {
+    // Keep localStorage updated whenever favorites change.
     localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favoriteBooks));
   }, [favoriteBooks]);
 
   const toggleFavoriteBook = (book) => {
+    // If the book is already saved, remove it. Otherwise, add it.
     setFavoriteBooks((currentFavoriteBooks) =>
       currentFavoriteBooks.some((favoriteBook) => favoriteBook.id === book.id)
         ? currentFavoriteBooks.filter((favoriteBook) => favoriteBook.id !== book.id)
