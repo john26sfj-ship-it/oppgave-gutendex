@@ -1,18 +1,13 @@
 import { useParams } from "react-router-dom";
-import { useBookDetailsFetch } from "../Logic/ApiFetch";
+import { useBookDetailsQuery } from "../Logic/bookQueries";
 import styles from "../styles/BookDetails.module.css";
 
 export default function BookDetails() {
   const { bookId } = useParams();
-  const { data: book, loading, isError, error } = useBookDetailsFetch(bookId);
+  const { data: book, loading, isError, error } = useBookDetailsQuery(bookId);
   const title = book?.title;
   const authors = book?.authors || [];
   const summaries = book?.summaries || [];
-
-  console.log("bookId", bookId);
-  console.log("title", title);
-  console.log("authors", authors);
-  console.log("summaries", summaries);
 
   if (loading) {
     return <div>Loading...</div>;

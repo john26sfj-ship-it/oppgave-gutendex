@@ -1,5 +1,4 @@
 import { usePageContext } from "../State/PageContext";
-import { useState } from "react";
 import styles from "../styles/NavBar.module.css";
 
 export default function PageButtons() {

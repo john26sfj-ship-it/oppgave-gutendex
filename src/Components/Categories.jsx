@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useCategoriesContext } from "../State/CategoriesContext";
 import styles from "../styles/NavBar.module.css";
 import { useNavigate } from "react-router-dom";

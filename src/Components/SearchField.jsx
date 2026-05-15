@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useSearchContext } from "../State/SearchContext";
 import styles from "../styles/NavBar.module.css";
 import { useNavigate } from "react-router-dom";
+import { usePageContext } from "../State/PageContext";
 
 export default function SearchField() {
   const { search, setSearch } = useSearchContext();
   const [searchInput, setSearchInput] = useState(search);
   const navigate = useNavigate();
+  const { setPage } = usePageContext();
 
   useEffect(() => {
     setSearchInput(search);
@@ -18,6 +20,7 @@ export default function SearchField() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setPage(1);
     setSearch(searchInput);
     navigate("/");
   };

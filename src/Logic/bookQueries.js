@@ -40,7 +40,7 @@ async function fetchBookDetails(bookId) {
   return response.json();
 }
 
-export function useApiFetch() {
+export function useBooksQuery() {
   const { category } = useCategoriesContext();
   const { search } = useSearchContext();
   const { page } = usePageContext();
@@ -55,7 +55,7 @@ export function useApiFetch() {
   };
 }
 
-export function useBookDetailsFetch(bookId) {
+export function useBookDetailsQuery(bookId) {
   const query = useQuery({
     queryKey: ["book", bookId],
     queryFn: () => fetchBookDetails(bookId),
