@@ -6,8 +6,59 @@
   margin: 10% auto;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  text-align: center;
+}
+
+.card {
+  position: relative;
+  width: 140px;
+  height: 200px;
+  margin: 1rem auto;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgba(455, 455, 455, 0.5);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  max-width: 95%;
+  max-height: 96%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  box-shadow: var(--primary-text-color) 0px 0px 9px;
+}
+
+.heart {
+  background-color: transparent;
+  position: absolute;
+  z-index: 10;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+.summaries {
+  font-weight: 600;
+}
+
+.formatLink {
+  color: blue;
+  display: block;
+  margin: 0.5rem;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 
 p {
   margin: 0.5rem;
+}
+
+h3 {
+  color: blue;
 }

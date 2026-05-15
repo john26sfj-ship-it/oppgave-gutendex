@@ -1,4 +1,4 @@
-import styles from "../styles/NavBar.module.css";
+import styles from "../styles/Header.module.css";
 import { Link } from "react-router-dom";
 
 export default function NavButtons() {

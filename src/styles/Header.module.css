@@ -1,3 +1,7 @@
+.header {
+  background-color: var(--secondary-background-color);
+}
+
 nav {
   text-align: center;
 }

@@ -1,23 +1,30 @@
 import { usePageContext } from "../State/PageContext";
-import styles from "../styles/NavBar.module.css";
+import { useBooksQuery } from "../Logic/bookQueries";
+import styles from "../styles/Header.module.css";
 
 export default function PageButtons() {
   const { page, setPage } = usePageContext();
+  const { data, loading } = useBooksQuery();
 
   const handlePageChange = (newPage) => {
-    setPage(newPage);
+    setPage(Math.max(1, newPage));
   };
 
   return (
     <div className={styles.pageButtons}>
       <button
         className={styles.searchElement}
+        disabled={page === 1}
         onClick={() => handlePageChange(page - 1)}
       >
         Previous page
       </button>
+      <div>
+        <p>Page: {page}</p>
+      </div>
       <button
         className={styles.searchElement}
+        disabled={loading || !data?.next}
         onClick={() => handlePageChange(page + 1)}
       >
         Next page

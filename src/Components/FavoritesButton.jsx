@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFavoritesContext } from "../State/FavoritesContext";
-import styles from "../styles/NavBar.module.css";
+import styles from "../styles/Header.module.css";
 import { useState } from "react";
 
 export default function FavoritesButton() {

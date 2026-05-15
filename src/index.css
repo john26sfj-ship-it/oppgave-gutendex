@@ -3,7 +3,14 @@
   line-height: 1.5;
   font-weight: 400;
   --primary-background-color: #fdb886;
+  --secondary-background-color: #a5957f;
   --primary-text-color: #3f1b01;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 * {

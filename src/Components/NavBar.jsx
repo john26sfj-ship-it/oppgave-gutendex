@@ -1,14 +1,14 @@
 import Categories from "./Categories";
 import ResetButton from "./ResetButton";
 import SearchField from "./SearchField";
-import styles from "../styles/NavBar.module.css";
+import styles from "../styles/Header.module.css";
 import PageButtons from "./PageButtons";
 import FavoritesButton from "./FavoritesButton";
 import NavButtons from "./NavButtons";
 
 export default function NavBar() {
   return (
-    <nav>
+    <header className={styles.header}>
       <h1>GutenDex</h1>
       <div className={styles.searchContainer}>
         <Categories />
@@ -20,6 +20,6 @@ export default function NavBar() {
         <NavButtons />
       </div>
       <PageButtons />
-    </nav>
+    </header>
   );
 }
