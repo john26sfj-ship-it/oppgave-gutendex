@@ -35,7 +35,7 @@
   height: 200px;
   border: none;
   border-radius: 0.5rem;
-  background-color: rgba(455, 455, 455, 0.5);
+  background-color: var(--secondary-background-color);
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;

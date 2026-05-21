@@ -1,9 +1,36 @@
 .header {
   background-color: var(--secondary-background-color);
+  backdrop-filter: blur(10px);
+  text-shadow: 0 0 1px #121212;
 }
 
 nav {
   text-align: center;
+}
+
+.headerTop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.menuButton {
+  margin: 0 1rem;
+  padding: 0.2rem 0.5rem;
+  color: var(--primary-text-color);
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgba(455, 455, 455, 0.5);
+  cursor: pointer;
+}
+
+.menuContent {
+  display: none;
+}
+
+.menuOpen {
+  display: block;
 }
 
 .searchContainer {
