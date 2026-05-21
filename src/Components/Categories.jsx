@@ -1,14 +1,17 @@
 import { useCategoriesContext } from "../State/CategoriesContext";
 import styles from "../styles/Header.module.css";
 import { useNavigate } from "react-router-dom";
+import { useMenuContext } from "../State/MenuContext";
 
 export default function Categories() {
   const { category, setCategory } = useCategoriesContext();
   const navigate = useNavigate();
+  const { toggleMenu } = useMenuContext();
 
   const handleChange = (event) => {
     setCategory(event.target.value);
     navigate("/");
+    toggleMenu();
   };
 
   return (

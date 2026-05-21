@@ -6,6 +6,7 @@ import PageButtons from "./PageButtons";
 import FavoritesButton from "./FavoritesButton";
 import NavButtons from "./NavButtons";
 import { useState } from "react";
+import { MenuContextProvider } from "../State/MenuContext";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,18 +23,22 @@ export default function Header() {
           {isOpen ? "X" : "☰"}
         </button>
       </div>
-      <div className={`${styles.menuContent} ${isOpen ? styles.menuOpen : ""}`}>
-        <div className={styles.searchContainer}>
-          <Categories />
-          <SearchField />
-          <ResetButton />
-        </div>
-        <div className={styles.navButtons}>
-          <FavoritesButton />
-          <NavButtons />
+      <MenuContextProvider toggleMenu={toggleMenu}>
+        <div
+          className={`${styles.menuContent} ${isOpen ? styles.menuOpen : ""}`}
+        >
+          <div className={styles.searchContainer}>
+            <Categories />
+            <SearchField />
+            <ResetButton />
+          </div>
+          <div className={styles.navButtons}>
+            <FavoritesButton />
+            <NavButtons />
+          </div>
         </div>
         <PageButtons />
-      </div>
+      </MenuContextProvider>
     </header>
   );
 }

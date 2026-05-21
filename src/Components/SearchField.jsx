@@ -3,12 +3,14 @@ import { useSearchContext } from "../State/SearchContext";
 import styles from "../styles/Header.module.css";
 import { useNavigate } from "react-router-dom";
 import { usePageContext } from "../State/PageContext";
+import { useMenuContext } from "../State/MenuContext";
 
 export default function SearchField() {
   const { search, setSearch } = useSearchContext();
   const [searchInput, setSearchInput] = useState(search);
   const navigate = useNavigate();
   const { setPage } = usePageContext();
+  const { toggleMenu } = useMenuContext();
 
   useEffect(() => {
     setSearchInput(search);
@@ -24,6 +26,7 @@ export default function SearchField() {
     setPage(1);
     setSearch(searchInput);
     navigate("/");
+    toggleMenu();
   };
 
   return (

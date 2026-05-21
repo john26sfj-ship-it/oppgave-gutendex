@@ -5,6 +5,8 @@ import styles from "../styles/Header.module.css";
 export default function PageButtons() {
   const { page, setPage } = usePageContext();
   const { data, loading } = useBooksQuery();
+  const totalBooks = data?.count ?? 0;
+  const totalPages = Math.ceil(totalBooks / 32);
 
   const handlePageChange = (newPage) => {
     // Prevent the page number from going below 1.
@@ -12,24 +14,43 @@ export default function PageButtons() {
   };
 
   return (
-    <div className={styles.pageButtons}>
-      <button
-        className={styles.searchElement}
-        disabled={page === 1}
-        onClick={() => handlePageChange(page - 1)}
-      >
-        Previous page
-      </button>
-      <div>
-        <p>Page: {page}</p>
+    <div className={styles.pageControls}>
+      <p>Books in search: {totalBooks}</p>
+      <div className={styles.pageButtons}>
+        <button
+          className={styles.searchElement}
+          disabled={page === 1}
+          onClick={() => handlePageChange(1)}
+        >
+          First page
+        </button>
+        <button
+          className={styles.searchElement}
+          disabled={page === 1}
+          onClick={() => handlePageChange(page - 1)}
+        >
+          Previous page
+        </button>
+        <div>
+          <p>
+            Page: {page} / {totalPages || "..."}
+          </p>
+        </div>
+        <button
+          className={styles.searchElement}
+          disabled={loading || !data?.next}
+          onClick={() => handlePageChange(page + 1)}
+        >
+          Next page
+        </button>
+        <button
+          className={styles.searchElement}
+          disabled={loading || page === totalPages}
+          onClick={() => handlePageChange(totalPages || 1)}
+        >
+          Last page
+        </button>
       </div>
-      <button
-        className={styles.searchElement}
-        disabled={loading || !data?.next}
-        onClick={() => handlePageChange(page + 1)}
-      >
-        Next page
-      </button>
     </div>
   );
 }
