@@ -46,6 +46,7 @@
 }
 
 .imageLink {
+  text-decoration: none;
   width: 95%;
   height: 96%;
   display: flex;
@@ -63,6 +64,18 @@
   box-shadow: var(--primary-text-color) 0px 0px 9px;
 }
 
+.titleFallback {
+  max-width: 90%;
+  color: var(--primary-text-color);
+  font-size: 0.9rem;
+  text-align: center;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  line-clamp: 6;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
 .heart {
   background-color: transparent;
   position: absolute;

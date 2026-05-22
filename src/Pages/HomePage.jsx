@@ -15,11 +15,8 @@ export default function HomePage() {
   const books = showFavorites ? favoriteBooks : data?.results || [];
 
   useEffect(() => {
-    // Helpful while learning the API response shape.
-    if (data) {
-      console.log("HomePage full API result:", data);
-    }
-  }, [data]);
+    console.log("HomePage books shown on screen:", books);
+  }, [books]);
 
   if (!showFavorites && loading) {
     return <p className={styles.loading}>Loading...</p>;
@@ -43,11 +40,18 @@ export default function HomePage() {
             onClick={() => toggleFavoriteBook(result)}
           />
           <Link className={styles.imageLink} to={`/book/${result.id}`}>
-            <img
-              className={styles.image}
-              src={result.formats["image/jpeg"]}
-              alt={result.title}
-            />
+            {result.formats["image/jpeg"] ? (
+              <img
+                className={styles.image}
+                src={result.formats["image/jpeg"]}
+                alt={result.title}
+              />
+            ) : (
+              <div>
+                <p className={styles.titleFallback}>{result.title}</p>
+                <p className={styles.titleFallback}>No cover available</p>
+              </div>
+            )}
           </Link>
         </div>
       ))}
