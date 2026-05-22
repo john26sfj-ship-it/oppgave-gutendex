@@ -32,7 +32,7 @@ nav {
   opacity: 0;
   overflow: hidden;
   transition:
-    max-height 250ms ease,
+    max-height 350ms ease,
     opacity 200ms ease;
 }
 

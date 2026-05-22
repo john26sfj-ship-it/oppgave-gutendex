@@ -22,14 +22,14 @@ export default function PageButtons() {
           disabled={page === 1}
           onClick={() => handlePageChange(1)}
         >
-          First page
+          First
         </button>
         <button
           className={styles.searchElement}
           disabled={page === 1}
           onClick={() => handlePageChange(page - 1)}
         >
-          Previous page
+          Previous
         </button>
         <div>
           <p>
@@ -41,14 +41,14 @@ export default function PageButtons() {
           disabled={loading || !data?.next}
           onClick={() => handlePageChange(page + 1)}
         >
-          Next page
+          Next
         </button>
         <button
           className={styles.searchElement}
           disabled={loading || page === totalPages}
           onClick={() => handlePageChange(totalPages || 1)}
         >
-          Last page
+          Last
         </button>
       </div>
     </div>
