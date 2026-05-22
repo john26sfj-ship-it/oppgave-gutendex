@@ -22,6 +22,7 @@ export default function FavoritesButton() {
           setShowFavorites(true);
           navigate("/");
         } else {
+          // Go back to the page the user was on before entering favorites.
           setShowFavorites(false);
           navigate(returnPath || "/");
         }

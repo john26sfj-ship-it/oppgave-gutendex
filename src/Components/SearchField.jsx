@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 import { useSearchContext } from "../State/SearchContext";
 import styles from "../styles/Header.module.css";
 import { useNavigate } from "react-router-dom";
@@ -7,36 +7,31 @@ import { useMenuContext } from "../State/MenuContext";
 
 export default function SearchField() {
   const { search, setSearch } = useSearchContext();
-  const [searchInput, setSearchInput] = useState(search);
+  const searchInputRef = useRef(null);
   const navigate = useNavigate();
   const { setPage } = usePageContext();
   const { toggleMenu } = useMenuContext();
-
-  useEffect(() => {
-    setSearchInput(search);
-  }, [search]);
-
-  const handleChange = (event) => {
-    setSearchInput(event.target.value);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // New searches should always begin on page 1.
     setPage(1);
-    setSearch(searchInput);
+    setSearch(searchInputRef.current.value);
     navigate("/");
+    // Close the mobile menu after the user submits a search.
     toggleMenu();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.searchForm} onSubmit={handleSubmit}>
       <input
         className={styles.searchElement}
         type="text"
         placeholder="Search..."
-        value={searchInput}
-        onChange={handleChange}
+        defaultValue={search}
+        // Remount the input when reset clears the search context.
+        key={search}
+        ref={searchInputRef}
       />
     </form>
   );

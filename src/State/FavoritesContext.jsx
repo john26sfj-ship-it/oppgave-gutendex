@@ -15,6 +15,7 @@ export function FavoritesContextProvider({ children }) {
     try {
       return JSON.parse(storedFavoriteBooks);
     } catch {
+      // Bad saved JSON should not break the app; just start fresh.
       return [];
     }
   });
@@ -26,8 +27,8 @@ export function FavoritesContextProvider({ children }) {
   }, [favoriteBooks]);
 
   const toggleFavoriteBook = (book) => {
-    // If the book is already saved, remove it. Otherwise, add it.
     setFavoriteBooks((currentFavoriteBooks) =>
+      // Store full book objects so favorites can render without refetching.
       currentFavoriteBooks.some((favoriteBook) => favoriteBook.id === book.id)
         ? currentFavoriteBooks.filter((favoriteBook) => favoriteBook.id !== book.id)
         : [...currentFavoriteBooks, book],

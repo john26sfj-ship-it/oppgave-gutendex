@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 const CategoriesContext = createContext();
 export function CategoriesContextProvider({ children }) {
+  // Empty string means no topic filter in the Gutendex request.
   const [category, setCategory] = useState("");
   const values = {
     category,

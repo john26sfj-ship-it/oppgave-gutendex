@@ -9,7 +9,6 @@
   display: grid;
   justify-content: space-around;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat();
 }
 
 @media screen and (min-width: 550px) {
@@ -46,6 +45,7 @@
 }
 
 .imageLink {
+  /* Remove the default underline from the React Router link around each card. */
   text-decoration: none;
   width: 95%;
   height: 96%;
@@ -65,6 +65,7 @@
 }
 
 .titleFallback {
+  /* Keep long book titles inside the fixed-size cover card. */
   max-width: 90%;
   color: var(--primary-text-color);
   font-size: 0.9rem;
@@ -76,6 +77,7 @@
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
 }
+
 .heart {
   background-color: transparent;
   position: absolute;

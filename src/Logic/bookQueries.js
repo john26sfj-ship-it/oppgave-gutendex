@@ -9,10 +9,11 @@ import { usePageContext } from "../State/PageContext";
  * @returns {Promise<object>}
  */
 async function fetchBooks({ category, search, page }) {
-  // URLSearchParams builds the query string safely.
+  // URLSearchParams avoids hand-building ?topic=...&search=... strings.
   const params = new URLSearchParams();
 
   if (category !== "") {
+    // Gutendex uses "topic" for category/bookshelf-style filtering.
     params.set("topic", category);
   }
 
@@ -56,7 +57,7 @@ export function useBooksQuery() {
   const { search } = useSearchContext();
   const { page } = usePageContext();
   const query = useQuery({
-    // This key changes when filters or page changes, so TanStack refetches.
+    // Include filters in the key so cached pages stay separate.
     queryKey: ["books", { category, search, page }],
     queryFn: () => fetchBooks({ category, search, page }),
   });
@@ -69,6 +70,7 @@ export function useBooksQuery() {
 
 export function useBookDetailsQuery(bookId) {
   const query = useQuery({
+    // Details are cached per id, separate from the paginated list query.
     queryKey: ["book", bookId],
     queryFn: () => fetchBookDetails(bookId),
     // Do not fetch until React Router has given us a book id.

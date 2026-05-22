@@ -1,16 +1,10 @@
-# React + Vite
+# Gutendex
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Gutendex is a React/Vite app for browsing public-domain books from the
+Gutendex API. The app lets users search for books, filter by category, move
+through paginated results, open a detail page for each book, and save favorite
+books locally in the browser.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The project uses React Router for navigation, TanStack Query for API fetching
+and caching, CSS modules for component styling, and localStorage to keep
+favorites available after a page refresh.

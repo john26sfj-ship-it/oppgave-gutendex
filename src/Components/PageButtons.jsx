@@ -6,10 +6,11 @@ export default function PageButtons() {
   const { page, setPage } = usePageContext();
   const { data, loading } = useBooksQuery();
   const totalBooks = data?.count ?? 0;
+  // Gutendex returns 32 books per page.
   const totalPages = Math.ceil(totalBooks / 32);
 
   const handlePageChange = (newPage) => {
-    // Prevent the page number from going below 1.
+    // Prevent invalid page 0 when clicking Previous on page 1.
     setPage(Math.max(1, newPage));
   };
 
@@ -19,6 +20,7 @@ export default function PageButtons() {
       <div className={styles.pageButtons}>
         <button
           className={styles.searchElement}
+          type="button"
           disabled={page === 1}
           onClick={() => handlePageChange(1)}
         >
@@ -26,6 +28,7 @@ export default function PageButtons() {
         </button>
         <button
           className={styles.searchElement}
+          type="button"
           disabled={page === 1}
           onClick={() => handlePageChange(page - 1)}
         >
@@ -38,6 +41,8 @@ export default function PageButtons() {
         </div>
         <button
           className={styles.searchElement}
+          type="button"
+          // Gutendex tells us whether another page exists.
           disabled={loading || !data?.next}
           onClick={() => handlePageChange(page + 1)}
         >
@@ -45,6 +50,7 @@ export default function PageButtons() {
         </button>
         <button
           className={styles.searchElement}
+          type="button"
           disabled={loading || page === totalPages}
           onClick={() => handlePageChange(totalPages || 1)}
         >

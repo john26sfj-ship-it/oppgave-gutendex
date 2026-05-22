@@ -7,15 +7,11 @@ export default function NavButtons() {
 
   return (
     <>
-      <Link to="/">
-        <button className={styles.navButton} onClick={toggleMenu}>
-          Home
-        </button>
+      <Link className={styles.navButton} to="/" onClick={toggleMenu}>
+        Home
       </Link>
-      <Link to="/about">
-        <button className={styles.navButton} onClick={toggleMenu}>
-          About
-        </button>
+      <Link className={styles.navButton} to="/about" onClick={toggleMenu}>
+        About
       </Link>
     </>
   );

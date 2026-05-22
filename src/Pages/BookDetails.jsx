@@ -13,10 +13,11 @@ export default function BookDetails() {
   const authors = book?.authors || [];
   const languages = book?.languages || [];
   const summaries = book?.summaries || [];
-  const download_count = book?.download_count || [];
+  const downloadCount = book?.download_count || 0;
   const categories = book?.bookshelves || [];
+  // Same Gutendex MIME-key pattern as the home page cover image.
   const image = book?.formats?.["image/jpeg"];
-  // Keep only downloadable file formats like PDF, EPUB, and ZIP.
+  // Hide text/html here so this section stays focused on download files.
   const applicationFormats = Object.entries(book?.formats || {}).filter(
     ([format]) => format.startsWith("application/"),
   );
@@ -29,7 +30,7 @@ export default function BookDetails() {
     return <div>Loading...</div>;
   }
 
-  // TanStack stores thrown fetch errors here.
+  // fetchBookDetails throws; TanStack exposes that error through isError/error.
   if (isError) {
     return <div>{error.message}</div>;
   }
@@ -48,18 +49,20 @@ export default function BookDetails() {
       </div>
       {authors.map(({ name, birth_year, death_year }) => (
         <div key={`${name}-${birth_year}-${death_year}`}>
-          <p>Author: {name}</p>
-          <p>Birth year: {birth_year}</p>
-          <p>Death year: {death_year}</p>
+          <p className={styles.detailText}>Author: {name}</p>
+          <p className={styles.detailText}>Birth year: {birth_year}</p>
+          <p className={styles.detailText}>Death year: {death_year}</p>
         </div>
       ))}
-      <p>Languages: {languages.join(", ")}</p>
-      <p>Downloaded: {download_count} times</p>
+      <p className={styles.detailText}>Languages: {languages.join(", ")}</p>
+      <p className={styles.detailText}>Downloaded: {downloadCount} times</p>
       <p className={styles.summaries}>Summaries: {summaries.join(", ")}</p>
       {categories.map((category) => (
-        <p key={category}>{category}</p>
+        <p className={styles.detailText} key={category}>
+          {category}
+        </p>
       ))}
-      <h3>Download links:</h3>
+      <h3 className={styles.downloadHeading}>Download links:</h3>
       {applicationFormats.map(([format, url]) => (
         <a
           className={styles.formatLink}

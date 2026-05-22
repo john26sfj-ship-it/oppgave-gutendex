@@ -1,5 +1,5 @@
 .glassBackground {
-  background-color: rgba(455, 455, 455, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
   width: fit-content;
   max-width: 700px;
@@ -16,7 +16,7 @@
   margin: 1rem auto;
   border: none;
   border-radius: 0.5rem;
-  background-color: rgba(455, 455, 455, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
@@ -45,6 +45,7 @@
 
 .summaries {
   font-weight: 600;
+  margin: 0.5rem;
 }
 
 .formatLink {
@@ -55,10 +56,10 @@
   text-align: center;
 }
 
-p {
+.detailText {
   margin: 0.5rem;
 }
 
-h3 {
+.downloadHeading {
   color: blue;
 }

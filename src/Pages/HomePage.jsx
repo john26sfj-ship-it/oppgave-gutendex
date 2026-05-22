@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useBooksQuery } from "../Logic/bookQueries";
 import { useFavoritesContext } from "../State/FavoritesContext";
 import styles from "../styles/HomePage.module.css";
@@ -11,12 +10,8 @@ export default function HomePage() {
   const { favoriteBooks, showFavorites, toggleFavoriteBook } =
     useFavoritesContext();
   const favoriteBookIds = favoriteBooks.map((book) => book.id);
-  // Show saved books when favorites mode is active.
+  // This is the exact list rendered below: either favorites or API results.
   const books = showFavorites ? favoriteBooks : data?.results || [];
-
-  useEffect(() => {
-    console.log("HomePage books shown on screen:", books);
-  }, [books]);
 
   if (!showFavorites && loading) {
     return <p className={styles.loading}>Loading...</p>;
@@ -40,6 +35,7 @@ export default function HomePage() {
             onClick={() => toggleFavoriteBook(result)}
           />
           <Link className={styles.imageLink} to={`/book/${result.id}`}>
+            {/* Gutendex stores cover URLs by MIME type; use brackets because the key contains "/". */}
             {result.formats["image/jpeg"] ? (
               <img
                 className={styles.image}
@@ -47,6 +43,7 @@ export default function HomePage() {
                 alt={result.title}
               />
             ) : (
+              // Some Gutendex books have text files but no cover image.
               <div>
                 <p className={styles.titleFallback}>{result.title}</p>
                 <p className={styles.titleFallback}>No cover available</p>

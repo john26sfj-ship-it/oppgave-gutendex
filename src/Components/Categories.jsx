@@ -2,15 +2,20 @@ import { useCategoriesContext } from "../State/CategoriesContext";
 import styles from "../styles/Header.module.css";
 import { useNavigate } from "react-router-dom";
 import { useMenuContext } from "../State/MenuContext";
+import { usePageContext } from "../State/PageContext";
 
 export default function Categories() {
   const { category, setCategory } = useCategoriesContext();
   const navigate = useNavigate();
   const { toggleMenu } = useMenuContext();
+  const { setPage } = usePageContext();
 
   const handleChange = (event) => {
+    // Empty string means "no category" and keeps the API topic param out.
     setCategory(event.target.value);
+    setPage(1);
     navigate("/");
+    // Category changes should leave the user back at the book grid.
     toggleMenu();
   };
 
