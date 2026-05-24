@@ -6,21 +6,14 @@ import { PageContextProvider } from "./State/PageContext.jsx";
 import { FavoritesContextProvider } from "./State/FavoritesContext.jsx";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes.jsx";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      // Book data changes rarely, so avoid refetching while moving around.
-      staleTime: 1000 * 60 * 5,
-      // Keep recent searches/details cached for quick back-and-forth browsing.
-      gcTime: 1000 * 60 * 30,
-    },
-  },
-});
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
+import { persistOptions, queryClient } from "./Logic/queryClient.js";
 
 createRoot(document.getElementById("root")).render(
-  <QueryClientProvider client={queryClient}>
+  <PersistQueryClientProvider
+    client={queryClient}
+    persistOptions={persistOptions}
+  >
     <PageContextProvider>
       <SearchContextProvider>
         <CategoriesContextProvider>
@@ -30,5 +23,5 @@ createRoot(document.getElementById("root")).render(
         </CategoriesContextProvider>
       </SearchContextProvider>
     </PageContextProvider>
-  </QueryClientProvider>,
+  </PersistQueryClientProvider>,
 );
