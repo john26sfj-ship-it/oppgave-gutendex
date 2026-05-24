@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.2;
   font-weight: 400;
@@ -6,6 +7,16 @@
   --primary-background-color: #fdb886;
   --secondary-background-color: rgba(165, 149, 127, 0.4);
   --primary-text-color: #321604;
+  --glass-background-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --secondary-background-color: rgba(50, 22, 4, 0.75);
+    --primary-text-color: #d8c2a7;
+    --glass-background-color: rgba(50, 22, 4, 0.75);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -20,12 +31,18 @@
   box-sizing: border-box;
 }
 
+html {
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+}
+
 body {
   background-image: var(--primary-background-image);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
+  color: var(--primary-text-color);
 }
 
 h1 {
@@ -38,4 +55,12 @@ p {
   color: var(--primary-text-color);
   text-align: center;
   font-size: 1rem;
+}
+
+button,
+input,
+select,
+textarea {
+  color: var(--primary-text-color);
+  color-scheme: inherit;
 }
