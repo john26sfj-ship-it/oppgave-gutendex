@@ -1,5 +1,5 @@
 .glassBackground {
-  background-color: car(--glass-background-color);
+  background-color: var(--glass-background-color);
   backdrop-filter: blur(10px);
   width: fit-content;
   max-width: 700px;
