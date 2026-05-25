@@ -9,6 +9,8 @@ import { router } from "./routes.jsx";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { persistOptions, queryClient } from "./Logic/queryClient.js";
 
+// Development-only helper: records Gutendex fetches on <html> data attributes
+// so we can inspect API calls from the browser without opening DevTools.
 if (import.meta.env.DEV && !window.__gutendexFetchMonitorInstalled) {
   const originalFetch = window.fetch;
 
@@ -38,6 +40,7 @@ if (import.meta.env.DEV && !window.__gutendexFetchMonitorInstalled) {
 }
 
 createRoot(document.getElementById("root")).render(
+  // The providers make shared state available to every route/component below.
   <PersistQueryClientProvider
     client={queryClient}
     persistOptions={persistOptions}

@@ -17,6 +17,8 @@ export default function Header() {
   const location = useLocation();
   const { favoriteBooks, showFavorites } = useFavoritesContext();
   const isHomePage = location.pathname === "/";
+  // Page buttons are only useful for the home grid. In favorites mode they
+  // appear only when local favorites need more than one page.
   const shouldShowPageButtons =
     isHomePage && (!showFavorites || favoriteBooks.length > BOOKS_PER_PAGE);
 

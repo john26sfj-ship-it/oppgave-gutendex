@@ -4,8 +4,15 @@ import styles from "../styles/Header.module.css";
 
 const BOOKS_PER_PAGE = 32;
 
+/**
+ * Renders pagination for either Gutendex results or local favorites.
+ *
+ * @param {{ isFavoritesMode?: boolean, totalFavorites?: number }} props
+ */
 export default function PageButtons({ isFavoritesMode = false, totalFavorites = 0 }) {
   const { page, setPage } = usePageContext();
+  // In favorites mode, pagination is based on localStorage-backed data, so the
+  // Gutendex query is disabled to avoid an unnecessary API call.
   const { data, loading } = useBooksQuery({ enabled: !isFavoritesMode });
   const totalBooks = isFavoritesMode ? totalFavorites : data?.count ?? 0;
   // Gutendex returns 32 books per page.

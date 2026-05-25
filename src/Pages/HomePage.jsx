@@ -16,6 +16,8 @@ export default function HomePage() {
     enabled: !showFavorites,
   });
   const favoriteBookIds = favoriteBooks.map((book) => book.id);
+  // Favorites are local data, so they are paginated with array.slice instead of
+  // asking Gutendex for another page.
   const firstFavoriteIndex = (page - 1) * BOOKS_PER_PAGE;
   const visibleFavoriteBooks = favoriteBooks.slice(
     firstFavoriteIndex,
@@ -66,6 +68,7 @@ export default function HomePage() {
                 </div>
               )}
             </Link>
+            {/* CSS reveals this title after a short hover/focus delay. */}
             <p className={styles.bookTitleTooltip}>{result.title}</p>
           </div>
         ))}

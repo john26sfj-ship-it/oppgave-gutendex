@@ -9,6 +9,8 @@ export default function FavoritesButton() {
   const { setPage } = usePageContext();
   const navigate = useNavigate();
   const location = useLocation();
+  // When favorites are hidden again, this path lets the user return to where
+  // they were before opening the favorites view.
   const [returnPath, setReturnPath] = useState(null);
 
   return (

@@ -5,6 +5,7 @@ function App() {
   return (
     <>
       <Header />
+      {/* Outlet is where React Router renders the matching child route. */}
       <Outlet />
     </>
   );

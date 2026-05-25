@@ -9,6 +9,7 @@ export const router = createBrowserRouter([
     path: "/",
     element: <App />,
     errorElement: <h1>error</h1>,
+    // Child routes render inside App's <Outlet />.
     children: [
       {
         index: true,

@@ -7,6 +7,8 @@ import { useMenuContext } from "../State/MenuContext";
 
 export default function SearchField() {
   const { search, setSearch } = useSearchContext();
+  // This is an uncontrolled input: React reads its value only on submit through
+  // the ref, instead of storing every keystroke in state.
   const searchInputRef = useRef(null);
   const navigate = useNavigate();
   const { setPage } = usePageContext();

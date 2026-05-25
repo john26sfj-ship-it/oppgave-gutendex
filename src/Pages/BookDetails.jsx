@@ -17,7 +17,8 @@ export default function BookDetails() {
   const categories = book?.bookshelves || [];
   // Same Gutendex MIME-key pattern as the home page cover image.
   const image = book?.formats?.["image/jpeg"];
-  // Hide text/html here so this section stays focused on download files.
+  // Object.entries turns the formats object into [format, url] pairs so it can
+  // be filtered and mapped in JSX.
   const applicationFormats = Object.entries(book?.formats || {}).filter(
     ([format]) => format.startsWith("application/"),
   );
