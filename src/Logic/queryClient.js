@@ -3,6 +3,7 @@ import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persist
 
 const PERSISTED_QUERY_CACHE_KEY = "gutendex:query-cache";
 const ONE_DAY = 1000 * 60 * 60 * 24;
+const THIRTY_MINUTES = 1000 * 60 * 30;
 
 function isBooksQuery(query) {
   return query.queryKey[0] === "books";
@@ -57,9 +58,9 @@ export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       // Book data changes rarely, so avoid refetching while moving around.
-      staleTime: 1000 * 60 * 5,
+      staleTime: THIRTY_MINUTES,
       // Keep recent searches/details cached for quick back-and-forth browsing.
-      gcTime: 1000 * 60 * 30,
+      gcTime: THIRTY_MINUTES,
     },
   },
 });

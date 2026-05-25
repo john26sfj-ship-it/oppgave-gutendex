@@ -1,10 +1,14 @@
 import { useEffect } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useCategoriesContext } from "../State/CategoriesContext";
 import { useSearchContext } from "../State/SearchContext";
 import { usePageContext } from "../State/PageContext";
 
-const BOOKS_STALE_TIME = 1000 * 60 * 5;
+const BOOKS_STALE_TIME = 1000 * 60 * 30;
 const BOOKS_PER_PAGE = 32;
 
 /**
@@ -31,7 +35,7 @@ async function fetchBooks({ category, search, page }) {
 
   const query = params.toString();
   const response = await fetch(
-    `https://gutendex.com/books${query ? `?${query}` : ""}`,
+    `https://gutendex.com/books/${query ? `?${query}` : ""}`,
   );
 
   if (!response.ok) {
@@ -56,27 +60,26 @@ async function fetchBookDetails(bookId) {
   return response.json();
 }
 
-export function useBooksQuery() {
+export function useBooksQuery({ enabled = true } = {}) {
   const queryClient = useQueryClient();
   const { category } = useCategoriesContext();
   const { search } = useSearchContext();
   const { page } = usePageContext();
-  const isDefaultPage = category === "" && search === "" && page === 1;
   const query = useQuery({
     // Include filters in the key so cached pages stay separate.
     queryKey: ["books", { category, search, page }],
     queryFn: () => fetchBooks({ category, search, page }),
-    refetchOnMount: isDefaultPage ? "always" : true,
+    enabled,
+    placeholderData: keepPreviousData,
   });
 
   useEffect(() => {
-    if (!query.data?.count) {
+    if (!enabled || !query.data?.count) {
       return;
     }
 
     const totalPages = Math.ceil(query.data.count / BOOKS_PER_PAGE);
-    const pagesToPrefetch = [page - 1, page + 1, 1, totalPages];
-    const alreadyQueuedPages = [];
+    const pagesToPrefetch = [...new Set([page - 1, page + 1, 1, totalPages])];
 
     pagesToPrefetch.forEach((pageToPrefetch) => {
       if (pageToPrefetch < 1) {
@@ -90,12 +93,6 @@ export function useBooksQuery() {
       if (pageToPrefetch === page) {
         return;
       }
-
-      if (alreadyQueuedPages.includes(pageToPrefetch)) {
-        return;
-      }
-
-      alreadyQueuedPages.push(pageToPrefetch);
 
       const queryKey = ["books", { category, search, page: pageToPrefetch }];
       const cachedPage = queryClient.getQueryData(queryKey);
@@ -119,11 +116,12 @@ export function useBooksQuery() {
         staleTime: BOOKS_STALE_TIME,
       });
     });
-  }, [category, page, query.data?.count, queryClient, search]);
+  }, [category, enabled, page, query.data?.count, queryClient, search]);
 
   return {
     ...query,
     loading: query.isLoading,
+    loadingUncachedPage: query.isLoading || query.isPlaceholderData,
   };
 }
 

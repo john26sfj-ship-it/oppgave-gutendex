@@ -45,7 +45,14 @@ export default function BookDetails() {
           alt="Click to favorite this book"
           onClick={() => toggleFavoriteBook(book)}
         />
-        {image && <img className={styles.image} src={image} alt={title} />}
+        {image && (
+          <img
+            className={styles.image}
+            src={image}
+            alt={title}
+            loading="lazy"
+          />
+        )}
       </div>
       {authors.map(({ name, birth_year, death_year }) => (
         <div key={`${name}-${birth_year}-${death_year}`}>

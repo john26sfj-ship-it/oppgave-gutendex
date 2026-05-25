@@ -9,6 +9,34 @@ import { router } from "./routes.jsx";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { persistOptions, queryClient } from "./Logic/queryClient.js";
 
+if (import.meta.env.DEV && !window.__gutendexFetchMonitorInstalled) {
+  const originalFetch = window.fetch;
+
+  window.__gutendexFetchMonitorInstalled = true;
+  window.__gutendexRequests = [];
+
+  window.fetch = async (...args) => {
+    const url = String(args[0]?.url ?? args[0]);
+
+    if (url.includes("gutendex.com/books")) {
+      window.__gutendexRequests.push({
+        url,
+        time: new Date().toISOString(),
+      });
+
+      document.documentElement.dataset.gutendexRequests = String(
+        window.__gutendexRequests.length,
+      );
+      document.documentElement.dataset.gutendexLastRequest = url;
+      document.documentElement.dataset.gutendexRequestUrls = JSON.stringify(
+        window.__gutendexRequests.map((request) => request.url),
+      );
+    }
+
+    return originalFetch(...args);
+  };
+}
+
 createRoot(document.getElementById("root")).render(
   <PersistQueryClientProvider
     client={queryClient}

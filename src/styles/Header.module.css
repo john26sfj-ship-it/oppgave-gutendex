@@ -70,7 +70,7 @@
 }
 
 .favoritesButton {
-  color: var(--primary-text-color);
+  color: var(--allways-dark-text);
   margin: 0 0.3rem;
   padding: 0.1rem 0.3rem;
   border: none;
@@ -91,7 +91,7 @@
 }
 
 .navButton {
-  color: var(--primary-text-color);
+  color: var(--allways-dark-text);
   display: inline-block;
   margin: 0 0.3rem;
   padding: 0.1rem 0.3rem;

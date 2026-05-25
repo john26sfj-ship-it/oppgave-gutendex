@@ -2,21 +2,23 @@ import { usePageContext } from "../State/PageContext";
 import { useBooksQuery } from "../Logic/bookQueries";
 import styles from "../styles/Header.module.css";
 
-export default function PageButtons() {
+const BOOKS_PER_PAGE = 32;
+
+export default function PageButtons({ isFavoritesMode = false, totalFavorites = 0 }) {
   const { page, setPage } = usePageContext();
-  const { data, loading } = useBooksQuery();
-  const totalBooks = data?.count ?? 0;
+  const { data, loading } = useBooksQuery({ enabled: !isFavoritesMode });
+  const totalBooks = isFavoritesMode ? totalFavorites : data?.count ?? 0;
   // Gutendex returns 32 books per page.
-  const totalPages = Math.ceil(totalBooks / 32);
+  const totalPages = Math.ceil(totalBooks / BOOKS_PER_PAGE);
 
   const handlePageChange = (newPage) => {
     // Prevent invalid page 0 when clicking Previous on page 1.
-    setPage(Math.max(1, newPage));
+    setPage(Math.min(Math.max(1, newPage), totalPages || 1));
   };
 
   return (
     <div className={styles.pageControls}>
-      <p>Books in search: {totalBooks}</p>
+      <p>{isFavoritesMode ? "Favorite books" : "Books in search"}: {totalBooks}</p>
       <div className={styles.pageButtons}>
         <button
           className={styles.searchElement}
@@ -43,7 +45,9 @@ export default function PageButtons() {
           className={styles.searchElement}
           type="button"
           // Gutendex tells us whether another page exists.
-          disabled={loading || !data?.next}
+          disabled={
+            loading || (isFavoritesMode ? page >= totalPages : !data?.next)
+          }
           onClick={() => handlePageChange(page + 1)}
         >
           Next

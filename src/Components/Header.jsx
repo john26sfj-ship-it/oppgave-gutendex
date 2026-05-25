@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import Categories from "./Categories";
 import FavoritesButton from "./FavoritesButton";
 import NavButtons from "./NavButtons";
@@ -6,10 +7,18 @@ import PageButtons from "./PageButtons";
 import ResetButton from "./ResetButton";
 import SearchField from "./SearchField";
 import { MenuContextProvider } from "../State/MenuContext";
+import { useFavoritesContext } from "../State/FavoritesContext";
 import styles from "../styles/Header.module.css";
+
+const BOOKS_PER_PAGE = 32;
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const { favoriteBooks, showFavorites } = useFavoritesContext();
+  const isHomePage = location.pathname === "/";
+  const shouldShowPageButtons =
+    isHomePage && (!showFavorites || favoriteBooks.length > BOOKS_PER_PAGE);
 
   const toggleMenu = () => {
     setIsOpen((currentIsOpen) => !currentIsOpen);
@@ -37,7 +46,12 @@ export default function Header() {
             <NavButtons />
           </div>
         </div>
-        <PageButtons />
+        {shouldShowPageButtons && (
+          <PageButtons
+            isFavoritesMode={showFavorites}
+            totalFavorites={favoriteBooks.length}
+          />
+        )}
       </MenuContextProvider>
     </header>
   );

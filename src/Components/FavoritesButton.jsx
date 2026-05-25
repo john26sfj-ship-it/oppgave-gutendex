@@ -1,10 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFavoritesContext } from "../State/FavoritesContext";
+import { usePageContext } from "../State/PageContext";
 import styles from "../styles/Header.module.css";
 import { useState } from "react";
 
 export default function FavoritesButton() {
   const { showFavorites, setShowFavorites } = useFavoritesContext();
+  const { setPage } = usePageContext();
   const navigate = useNavigate();
   const location = useLocation();
   const [returnPath, setReturnPath] = useState(null);
@@ -19,6 +21,7 @@ export default function FavoritesButton() {
         if (!showFavorites) {
           // Remember where the user came from before showing favorites.
           setReturnPath(location.pathname);
+          setPage(1);
           setShowFavorites(true);
           navigate("/");
         } else {
