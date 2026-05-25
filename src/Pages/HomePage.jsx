@@ -25,18 +25,18 @@ export default function HomePage() {
   const books = showFavorites ? visibleFavoriteBooks : data?.results || [];
 
   if (!showFavorites && loading) {
-    return <p className={styles.loading}>Loading...</p>;
+    return <p className="loading">Loading...</p>;
   }
 
   // API errors should not block the local favorites view.
   if (!showFavorites && isError) {
-    return <p className={styles.loading}>{error.message}</p>;
+    return <p className="loading">{error.message}</p>;
   }
 
   return (
     <>
       {!showFavorites && loadingUncachedPage && (
-        <p className={styles.loading}>Loading...</p>
+        <p className="loading">Loading...</p>
       )}
       <div className={styles.layout}>
         {books.map((result) => (
@@ -66,6 +66,7 @@ export default function HomePage() {
                 </div>
               )}
             </Link>
+            <p className={styles.bookTitleTooltip}>{result.title}</p>
           </div>
         ))}
       </div>

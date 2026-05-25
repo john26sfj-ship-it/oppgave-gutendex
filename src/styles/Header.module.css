@@ -1,7 +1,6 @@
 .header {
-  background-color: var(--secondary-background-color);
+  background-color: var(--glass-background-color);
   backdrop-filter: blur(10px);
-  text-shadow: 0 0 1px #121212;
 }
 
 .headerTop {
@@ -19,7 +18,7 @@
   color: var(--primary-text-color);
   border: none;
   border-radius: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--secondary-background-color);
   cursor: pointer;
 }
 
@@ -50,8 +49,13 @@
   padding: 0.1rem 0.3rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: var(--glass-background-color);
+  background-color: var(--secondary-background-color);
   backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+
+input.searchElement {
+  cursor: text;
 }
 
 .searchForm {
@@ -60,6 +64,7 @@
 
 .pageControls .searchElement {
   margin: 0.7rem 0.1rem;
+  background-color: var(--secondary-background-color);
 }
 
 .pageButtons {

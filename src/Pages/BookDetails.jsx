@@ -27,7 +27,7 @@ export default function BookDetails() {
   );
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <p className="loading">Loading...</p>;
   }
 
   // fetchBookDetails throws; TanStack exposes that error through isError/error.

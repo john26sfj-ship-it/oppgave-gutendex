@@ -14,7 +14,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --secondary-background-color: rgba(50, 22, 4, 0.75);
+    --secondary-background-color: rgb(41, 17, 2);
     --primary-text-color: #d8c2a7;
     --glass-background-color: rgba(50, 22, 4, 0.75);
   }
@@ -53,9 +53,18 @@ h1 {
 }
 
 p {
+  width: fit-content;
+  margin: 0 auto;
   color: var(--primary-text-color);
   text-align: center;
   font-size: 1rem;
+}
+
+.loading {
+  text-align: center;
+  margin: 1rem auto;
+  font-size: 3rem;
+  color: antiquewhite;
 }
 
 button,
@@ -63,5 +72,5 @@ input,
 select,
 textarea {
   color: var(--primary-text-color);
-  color-scheme: inherit;
+  background-color: var(--secondary-background-color);
 }
